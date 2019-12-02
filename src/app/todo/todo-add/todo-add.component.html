@@ -1,0 +1,8 @@
+<header class="header">
+  <h1>Tareas</h1>
+  <input class="new-todo"
+         placeholder="Agregar tarea"
+         [formControl]="textInput"
+         (keyup.enter)="addTodo()"
+         autofocus>
+</header>
