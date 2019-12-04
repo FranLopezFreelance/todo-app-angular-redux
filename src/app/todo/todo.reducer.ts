@@ -1,4 +1,4 @@
-import * as todoActions from './todo.actions';
+import * as TodoActions from './todo.actions';
 import {
   Todo
 } from './model/Todo.model';
@@ -9,16 +9,16 @@ let todo3 = new Todo('Tarea 3');
 todo2.done = true;
 const initialState: Todo[] = [todo1, todo2, todo3];
 
-export function todoReducer(state = initialState, action: todoActions.Actions): Todo[] {
+export function todoReducer(state = initialState, action: TodoActions.Actions): Todo[] {
   switch (action.type) {
-    case todoActions.ADD_TODO:
+    case TodoActions.ADD_TODO:
       let todo = new Todo(action.text);
       return [...state, todo];
-    case todoActions.TOOGLE_ALL:
+    case TodoActions.TOOGLE_ALL:
       return state.map(todoEdit => {
           return {...todoEdit, done: action.done };
       });
-    case todoActions.TOOGLE_TODO:
+    case TodoActions.TOOGLE_TODO:
       return state.map(todoEdit => {
         if (todoEdit.id === action.id) {
           return {...todoEdit, done: !todoEdit.done };
@@ -26,7 +26,7 @@ export function todoReducer(state = initialState, action: todoActions.Actions): 
           return todoEdit;
         }
       });
-    case todoActions.EDIT_TODO:
+    case TodoActions.EDIT_TODO:
       return state.map(todoEdit => {
         if (todoEdit.id === action.id) {
           return {...todoEdit, text: action.text };
@@ -34,8 +34,10 @@ export function todoReducer(state = initialState, action: todoActions.Actions): 
           return todoEdit;
         }
       });
-    case todoActions.DELETE_TODO:
-      return state.filter(todo => todo.id != action.id);
+    case TodoActions.DELETE_TODO:
+      return state.filter(todoEdit => todoEdit.id != action.id);
+    case TodoActions.DELETE_DONES:
+          return state.filter(todoEdit => !todoEdit.done);
     default:
       return state;
   }

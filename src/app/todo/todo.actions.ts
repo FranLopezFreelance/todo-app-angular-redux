@@ -5,7 +5,9 @@ export const TOOGLE_ALL = '[Todo] - Toogle todas las Tareas';
 export const TOOGLE_TODO = '[Todo] - Toogle Tarea';
 export const EDIT_TODO = '[Todo] - Editar Tarea';
 export const DELETE_TODO = '[Todo] - Borrar Tarea';
+export const DELETE_DONES = '[Todo] - Borrar Completados';
 
+//ACTION CREATORS. TODA ACTION TIENE UN TYPE Y/O UN PAYLOAD
 export class AddTodoAction implements Action {
   readonly type = ADD_TODO;
   constructor( public text: string ){};
@@ -31,5 +33,9 @@ export class DeleteTodoAction implements Action {
   constructor( public id: number ){};
 }
 
+export class DeleteDonesAction implements Action {
+  readonly type = DELETE_DONES;
+}
+
 export type Actions = AddTodoAction | ToogleAllAction | ToogleTodoAction |
-                      EditTodoAction | DeleteTodoAction;
+                      EditTodoAction | DeleteTodoAction | DeleteDonesAction;
